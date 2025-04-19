@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,15 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// AgroGuard specific colors
+				agro: {
+					'green-light': '#8BC34A',
+					'green-dark': '#4CAF50',
+					'brown': '#795548',
+					'blue': '#03A9F4',
+					'yellow': '#FFC107',
+					'red': '#F44336'
 				}
 			},
 			borderRadius: {
