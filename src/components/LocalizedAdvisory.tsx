@@ -1,9 +1,8 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, CircleAlert, CloudRain, CloudSun, Droplets, Plant, Sun, Thermometer, Wind } from "lucide-react";
+import { Calendar, CircleAlert, CloudRain, CloudSun, Droplets, Sprout, Sun, Thermometer, Wind } from "lucide-react";
 
 interface LocalizedAdvisoryProps {
   location: string;
@@ -377,7 +376,7 @@ const LocalizedAdvisory: React.FC<LocalizedAdvisoryProps> = ({ location }) => {
           
           <div className="mt-6 bg-green-50 rounded-lg p-4">
             <div className="flex items-start">
-              <Plant className="h-6 w-6 text-green-600 mr-3 mt-0.5" />
+              <Sprout className="h-6 w-6 text-green-600 mr-3 mt-0.5" />
               <div>
                 <h3 className="font-medium text-green-800 mb-1">General Farming Advice</h3>
                 <p className="text-sm text-green-700">
