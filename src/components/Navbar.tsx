@@ -1,12 +1,15 @@
 
 import React, { useState } from "react";
-import { Search, Menu, Bell, X } from "lucide-react";
+import { Search, Menu, Bell, X, LogOut } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 import i18n from "@/i18n";
 
 interface NavbarProps {
@@ -18,7 +21,22 @@ const Navbar: React.FC<NavbarProps> = ({ location, setLocation }) => {
   const [searchValue, setSearchValue] = useState(location);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { t } = useTranslation();
+  const { toast } = useToast();
+  const navigate = useNavigate();
   const currentLang = (i18n.language || 'en').split('-')[0];
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
+    } else {
+      navigate("/");
+    }
+  };
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -73,6 +91,9 @@ const Navbar: React.FC<NavbarProps> = ({ location, setLocation }) => {
                 </SelectContent>
               </Select>
             </div>
+            <Button variant="ghost" size="icon" onClick={handleLogout} title="Logout">
+              <LogOut className="h-5 w-5" />
+            </Button>
           </div>
 
           {/* Mobile Search Toggle */}
@@ -124,6 +145,16 @@ const Navbar: React.FC<NavbarProps> = ({ location, setLocation }) => {
                         </SelectContent>
                       </Select>
                     </div>
+                  </div>
+                  <div className="mt-4">
+                    <Button 
+                      variant="outline" 
+                      className="w-full" 
+                      onClick={handleLogout}
+                    >
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Logout
+                    </Button>
                   </div>
                 </div>
               </SheetContent>

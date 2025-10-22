@@ -1,6 +1,7 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
 import RiskDashboard from "@/components/RiskDashboard";
 import DiseaseDetection from "@/components/DiseaseDetection";
@@ -9,9 +10,28 @@ import LocalizedAdvisory from "@/components/LocalizedAdvisory";
 import Chatbot from "@/components/Chatbot";
 import { useTranslation } from "react-i18next";
 
-const Index = () => {
+const Dashboard = () => {
   const [location, setLocation] = useState("Karnataka, India");
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if user is logged in
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!session) {
+        navigate("/auth");
+      }
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (!session) {
+        navigate("/auth");
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [navigate]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -71,4 +91,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Dashboard;
