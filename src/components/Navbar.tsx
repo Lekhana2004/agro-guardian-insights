@@ -88,6 +88,9 @@ const Navbar: React.FC<NavbarProps> = ({ location, setLocation }) => {
                   <SelectItem value="en">{t('lang.en')}</SelectItem>
                   <SelectItem value="hi">{t('lang.hi')}</SelectItem>
                   <SelectItem value="mr">{t('lang.mr')}</SelectItem>
+                  <SelectItem value="bn">{t('lang.bn')}</SelectItem>
+                  <SelectItem value="te">{t('lang.te')}</SelectItem>
+                  <SelectItem value="ta">{t('lang.ta')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -142,6 +145,9 @@ const Navbar: React.FC<NavbarProps> = ({ location, setLocation }) => {
                           <SelectItem value="en">{t('lang.en')}</SelectItem>
                           <SelectItem value="hi">{t('lang.hi')}</SelectItem>
                           <SelectItem value="mr">{t('lang.mr')}</SelectItem>
+                          <SelectItem value="bn">{t('lang.bn')}</SelectItem>
+                          <SelectItem value="te">{t('lang.te')}</SelectItem>
+                          <SelectItem value="ta">{t('lang.ta')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>

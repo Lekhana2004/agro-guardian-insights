@@ -28,6 +28,9 @@
     "label": "Language",
     "en": "English",
     "hi": "Hindi",
-    "mr": "Marathi"
+    "mr": "Marathi",
+    "bn": "Bengali",
+    "te": "Telugu",
+    "ta": "Tamil"
   }
 }
