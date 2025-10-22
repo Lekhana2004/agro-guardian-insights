@@ -54,11 +54,34 @@ npm run dev
 
 This project is built with:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- Vite + React + TypeScript + Tailwind (shadcn-ui)
+- i18next for multilingual (en/hi/mr)
+- RAG chatbot server (Express + OpenAI)
+
+## Getting started
+
+1) Copy envs:
+```sh
+cp .env.example .env
+```
+Fill `OPENAI_API_KEY`.
+
+2) Install deps:
+```sh
+npm i
+```
+
+3) (Optional) Ingest local content for RAG:
+Put `.md/.txt` files in `content/`, then run:
+```sh
+npm run ingest
+```
+
+4) Start web + API together:
+```sh
+npm run dev:all
+```
+Web at http://localhost:8080, API at http://localhost:8787.
 
 ## How can I deploy this project?
 

@@ -6,9 +6,12 @@ import RiskDashboard from "@/components/RiskDashboard";
 import DiseaseDetection from "@/components/DiseaseDetection";
 import FertilizerRecommendation from "@/components/FertilizerRecommendation";
 import LocalizedAdvisory from "@/components/LocalizedAdvisory";
+import Chatbot from "@/components/Chatbot";
+import { useTranslation } from "react-i18next";
 
 const Index = () => {
   const [location, setLocation] = useState("Karnataka, India");
+  const { t, i18n } = useTranslation();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -17,26 +20,29 @@ const Index = () => {
       <main className="container mx-auto py-6 px-4">
         <header className="mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-agro-green-dark">
-            AgroGuard Dashboard
+            {t('header_title')}
           </h1>
           <p className="text-gray-600 mt-2">
-            Smart agriculture risk assessment and advisory for {location}
+            {t('header_subtitle', { location })}
           </p>
         </header>
 
         <Tabs defaultValue="risk" className="w-full">
-          <TabsList className="grid grid-cols-2 md:grid-cols-4 mb-8">
+          <TabsList className="grid grid-cols-2 md:grid-cols-5 mb-8">
             <TabsTrigger value="risk" className="text-sm md:text-base">
-              Risk Assessment
+              {t('tabs.risk')}
             </TabsTrigger>
             <TabsTrigger value="disease" className="text-sm md:text-base">
-              Disease Detection
+              {t('tabs.disease')}
             </TabsTrigger>
             <TabsTrigger value="fertilizer" className="text-sm md:text-base">
-              Fertilizer Advisor
+              {t('tabs.fertilizer')}
             </TabsTrigger>
             <TabsTrigger value="advisory" className="text-sm md:text-base">
-              Local Advisory
+              {t('tabs.advisory')}
+            </TabsTrigger>
+            <TabsTrigger value="chat" className="text-sm md:text-base">
+              {t('tabs.chat')}
             </TabsTrigger>
           </TabsList>
 
@@ -54,6 +60,10 @@ const Index = () => {
           
           <TabsContent value="advisory">
             <LocalizedAdvisory location={location} />
+          </TabsContent>
+          
+          <TabsContent value="chat">
+            <Chatbot lang={(i18n.language || 'en').split('-')[0]} />
           </TabsContent>
         </Tabs>
       </main>

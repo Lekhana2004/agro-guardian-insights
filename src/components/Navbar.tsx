@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import i18n from "@/i18n";
 
 interface NavbarProps {
   location: string;
@@ -14,6 +17,8 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ location, setLocation }) => {
   const [searchValue, setSearchValue] = useState(location);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const { t } = useTranslation();
+  const currentLang = (i18n.language || 'en').split('-')[0];
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,7 +34,7 @@ const Navbar: React.FC<NavbarProps> = ({ location, setLocation }) => {
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <span className="text-xl font-bold text-agro-green-dark">
-                AgroGuard
+                {t('brand')}
               </span>
             </div>
           </div>
@@ -39,7 +44,7 @@ const Navbar: React.FC<NavbarProps> = ({ location, setLocation }) => {
             <form onSubmit={handleSearch} className="relative w-64">
               <Input
                 type="text"
-                placeholder="Search location..."
+                placeholder={t('search_location')}
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
                 className="pr-10"
@@ -56,6 +61,18 @@ const Navbar: React.FC<NavbarProps> = ({ location, setLocation }) => {
             <Button variant="ghost" size="icon">
               <Bell className="h-5 w-5" />
             </Button>
+            <div className="w-36">
+              <Select value={currentLang} onValueChange={(lng) => i18n.changeLanguage(lng)}>
+                <SelectTrigger aria-label={t('lang.label')}>
+                  <SelectValue placeholder={t('lang.label')} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="en">{t('lang.en')}</SelectItem>
+                  <SelectItem value="hi">{t('lang.hi')}</SelectItem>
+                  <SelectItem value="mr">{t('lang.mr')}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
 
           {/* Mobile Search Toggle */}
@@ -84,24 +101,29 @@ const Navbar: React.FC<NavbarProps> = ({ location, setLocation }) => {
               <SheetContent side="left">
                 <div className="py-4">
                   <h2 className="text-xl font-bold text-agro-green-dark mb-4">
-                    AgroGuard
+                    {t('brand')}
                   </h2>
                   <div className="space-y-3">
-                    <button className="block w-full text-left px-4 py-2 rounded-md hover:bg-gray-100">
-                      Dashboard
-                    </button>
-                    <button className="block w-full text-left px-4 py-2 rounded-md hover:bg-gray-100">
-                      Disease Detection
-                    </button>
-                    <button className="block w-full text-left px-4 py-2 rounded-md hover:bg-gray-100">
-                      Fertilizer Advisor
-                    </button>
-                    <button className="block w-full text-left px-4 py-2 rounded-md hover:bg-gray-100">
-                      Local Advisory
-                    </button>
-                    <button className="block w-full text-left px-4 py-2 rounded-md hover:bg-gray-100">
-                      Settings
-                    </button>
+                    <button className="block w-full text-left px-4 py-2 rounded-md hover:bg-gray-100">{t('nav.dashboard')}</button>
+                    <button className="block w-full text-left px-4 py-2 rounded-md hover:bg-gray-100">{t('nav.disease_detection')}</button>
+                    <button className="block w-full text-left px-4 py-2 rounded-md hover:bg-gray-100">{t('nav.fertilizer_advisor')}</button>
+                    <button className="block w-full text-left px-4 py-2 rounded-md hover:bg-gray-100">{t('nav.local_advisory')}</button>
+                    <button className="block w-full text-left px-4 py-2 rounded-md hover:bg-gray-100">{t('nav.settings')}</button>
+                  </div>
+                  <div className="mt-4">
+                    <label className="text-sm text-gray-600">{t('lang.label')}</label>
+                    <div className="mt-2">
+                      <Select value={currentLang} onValueChange={(lng) => i18n.changeLanguage(lng)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder={t('lang.label')} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="en">{t('lang.en')}</SelectItem>
+                          <SelectItem value="hi">{t('lang.hi')}</SelectItem>
+                          <SelectItem value="mr">{t('lang.mr')}</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
                 </div>
               </SheetContent>
@@ -119,7 +141,7 @@ const Navbar: React.FC<NavbarProps> = ({ location, setLocation }) => {
           <form onSubmit={handleSearch} className="relative">
             <Input
               type="text"
-              placeholder="Search location..."
+              placeholder={t('search_location')}
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
               className="pr-10"

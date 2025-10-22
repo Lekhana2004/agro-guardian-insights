@@ -1,0 +1,1 @@
+Krishimitra provides localized agriculture advisories, pest and disease guidance, sowing windows, and fertilizer management best practices tailored to Indian states and crops. Data can include IMD weather outlooks, soil health cards, and government scheme information.
